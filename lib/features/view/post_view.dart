@@ -53,98 +53,96 @@ class PostView extends StatelessWidget {
 
   Expanded gettingmessages() {
     return Expanded(
-          flex: 1,
-          child: Container(
-            child: Observer(builder: (_) {
-              return ListView.builder(
-                itemCount: _viewmodel.posts.length,
-                scrollDirection: Axis.vertical,
-                itemBuilder: (BuildContext context, int index) {
-                  return Column(
+      flex: 1,
+      child: Container(
+        child: Observer(builder: (_) {
+          return ListView.builder(
+            itemCount: _viewmodel.posts.length,
+            scrollDirection: Axis.vertical,
+            itemBuilder: (BuildContext context, int index) {
+              return Column(
+                children: [
+                  Row(
                     children: [
-                      Row(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: CircleAvatar(
-                              radius: 40,
-                              backgroundColor: Colors.green,
-                              child: CircleAvatar(
-                                radius: 37,
-                                backgroundImage: NetworkImage(_viewmodel
-                                    .posts[index].downloadUrl
-                                    .toString()),
-                              ),
-                            ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: CircleAvatar(
+                          radius: 40,
+                          backgroundColor: Colors.green,
+                          child: CircleAvatar(
+                            radius: 37,
+                            backgroundImage: NetworkImage(
+                                _viewmodel.posts[index].downloadUrl.toString()),
                           ),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: InkWell(
-                              onTap: () {
-                               /*    Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => PostViewDetail() ),
-                        ); */
-
-
-                              },
-                              child: Container(
-                                height: 70,
-                                width: context.dynamicWidth(0.6),
-                                child: Column(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  crossAxisAlignment:
-                                      CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      _viewmodel.posts[index].author
-                                          .toString(),
-                                      style: context.textTheme.bodyText1,
-                                    ),
-                                    Text(
-                                      _viewmodel.posts[index].url.toString(),
-                                      style: TextStyle(
-                                          color:
-                                              Colors.black.withOpacity(0.4)),
-                                    )
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-                          Container(
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: InkWell(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => PostViewDetail(
+                                        downloadurl: _viewmodel
+                                            .posts[index].downloadUrl
+                                            .toString(),
+                                        author: _viewmodel.posts[index].author
+                                            .toString(),
+                                      )),
+                            );
+                          },
+                          child: Container(
                             height: 70,
+                            width: context.dynamicWidth(0.6),
                             child: Column(
-                              mainAxisAlignment:
-                                  MainAxisAlignment.spaceAround,
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  '27 min',
+                                  _viewmodel.posts[index].author.toString(),
+                                  style: context.textTheme.bodyText1,
+                                ),
+                                Text(
+                                  _viewmodel.posts[index].url.toString(),
                                   style: TextStyle(
-                                      color: Color(0xff44C551), fontSize: 14),
-                                ),
-                                CircleAvatar(
-                                  backgroundColor: Color(0xff44C551),
-                                  radius: 10,
-                                  child: Text(
-                                    '1',
-                                    style: context.primaryTextTheme.bodyText1,
-                                  ),
-                                ),
+                                      color: Colors.black.withOpacity(0.4)),
+                                )
                               ],
                             ),
-                          )
-                        ],
+                          ),
+                        ),
                       ),
+                      Container(
+                        height: 70,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Text(
+                              '27 min',
+                              style: TextStyle(
+                                  color: Color(0xff44C551), fontSize: 14),
+                            ),
+                            CircleAvatar(
+                              backgroundColor: Color(0xff44C551),
+                              radius: 10,
+                              child: Text(
+                                '1',
+                                style: context.primaryTextTheme.bodyText1,
+                              ),
+                            ),
+                          ],
+                        ),
+                      )
                     ],
-                  );
-                },
+                  ),
+                ],
               );
-            }),
-          ),
-        );
+            },
+          );
+        }),
+      ),
+    );
   }
 
   Container userActivate(BuildContext context) {
