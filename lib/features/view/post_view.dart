@@ -9,7 +9,10 @@ class PostView extends StatelessWidget {
   final _viewmodel = PostViewModel();
   @override
   Widget build(BuildContext context) {
-    _viewmodel.fetchData();
+    //_viewmodel.fetchData();
+    if (_viewmodel.context == null) {
+      _viewmodel.setContext(context);
+    }
     return Scaffold(
       bottomNavigationBar: CurvedNavigationBar(
         backgroundColor: Colors.transparent,
@@ -56,7 +59,11 @@ class PostView extends StatelessWidget {
       flex: 1,
       child: Container(
         child: Observer(builder: (_) {
-          return ListView.builder(
+          if(_viewmodel.isServiceRequestLoading){
+           return Center(child: CircularProgressIndicator(),);
+          }
+          else{
+            return ListView.builder(
             itemCount: _viewmodel.posts.length,
             scrollDirection: Axis.vertical,
             itemBuilder: (BuildContext context, int index) {
@@ -140,7 +147,9 @@ class PostView extends StatelessWidget {
               );
             },
           );
-        }),
+       
+          }
+           }),
       ),
     );
   }
