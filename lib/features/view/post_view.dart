@@ -77,7 +77,7 @@ class PostView extends StatelessWidget {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.all(8.0),
+                        padding:context.paddingLow,
                         child: InkWell(
                           onTap: () {
                             Navigator.push(
